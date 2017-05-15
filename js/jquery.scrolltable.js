@@ -1,3 +1,16 @@
+
+/*
+ * JQuery scrolltable core v0.0.01
+ *
+ * Copyright (c) 2017 Jian.Ma
+ *
+ * Licensed same as jquery - MIT License
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * email: 18551750323@163.com
+ * Begin date: 2017-05-15
+ */
+
 ;(function(factory) {
     if (typeof define === "function" && define.amd) {
         define(["jquery"], factory);
