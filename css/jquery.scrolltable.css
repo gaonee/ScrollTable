@@ -1,0 +1,63 @@
+/* ------------scroll table---------------- */
+.scroll-table {
+    width: 100%;
+    height: 100%;
+    table-layout: fixed;
+    font-size: 14px;
+}
+.scroll-table table {
+    width: 100%;
+    table-layout: fixed;
+    line-height: 32px;
+}
+.scroll-table .table-head {
+    height: 32px;
+}
+.scroll-table .table-head td {
+    font-weight: bold;
+}
+.scroll-table .table-body{
+    height: calc(100% - 32px);
+}
+.scroll-table .table-body .table-body-container {
+    position: relative;
+    overflow: hidden;
+}
+.scroll-table .table-body .table-body-holder {
+    position: relative;
+}
+.scroll-table .table-body td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.scroll-table.show-scrollbar .table-head table {
+    width: calc(100% - 17px);
+}
+
+/* theme dark */
+.scroll-table.theme-dark {
+    background: #c0c4c8;
+    text-align: left;
+}
+.scroll-table.theme-dark .table-head {
+    border-bottom: 1px solid #333;
+}
+/*.scroll-table.theme-dark .table-body tr.selected,*/
+.scroll-table.theme-dark .table-body tr:hover {
+    background: #fff;
+}
+
+/* theme track */
+.scroll-table.theme-track {
+    background: #ffffff;
+    text-align: center;
+}
+.scroll-table.theme-track .table-head {
+    border-bottom: none;
+}
+.scroll-table.theme-track .table-body tr.selected,
+.scroll-table.theme-track .table-body tr:hover {
+    background: #a4e1ff;
+}
