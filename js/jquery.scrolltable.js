@@ -130,6 +130,28 @@
             this.selectId = -1;
         };
 
+        this._encodeHtml = function(str) {
+            if (typeof str != 'string' || str.length == 0) {
+                return;
+            }
+
+            if (typeof str.encodeHTML === 'function') {
+                return str.encodeHTML();
+            }
+
+            return str.replace(/[&<>\'\"\s]/g, function(ch) {
+                switch (ch) {
+                    case "&": return "&amp;";
+                    case "<": return "&lt;";
+                    case ">": return "&gt;";
+                    case " ": return "&nbsp;";
+                    case "\'": return "&#39;";
+                    case "\"": return "&quot;";
+                    default: return ch;
+                }
+            });
+        };
+
         this._genItem = function(item) {
             if (!item || !$.isArray(item.texts)) {
                 return '';
@@ -144,7 +166,7 @@
 
             for (var i = 0,len = texts.length; i < len; i++) {
                 style = styles[i] || ("item_" + i);
-                itemEl += '<td class="'+style+'" title="'+texts[i]+'" width="'+sizes[i]+'">'+texts[i]+'</td>';
+                itemEl += '<td class="'+style+'" title="'+texts[i]+'" width="'+this._encodeHtml(sizes[i])+'">'+texts[i]+'</td>';
             }
 
             return '<tr data-id="'+item._id+'" class="'+(item.style||'')+'">'+itemEl+'</tr>';
@@ -187,7 +209,7 @@
                 themeStyle = "theme-" + this.options.theme;
 
             for (var i = 0,len = heads.length; i < len; i++) {
-                strHeadEl += '<td width="'+sizes[i]+'">'+heads[i]+'</td>';
+                strHeadEl += '<td width="'+sizes[i]+'">'+this._encodeHtml(heads[i])+'</td>';
             }
 
             strEl = '' +
