@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scroll table demo: quickstart</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="../../css/jquery.scrolltable.css">
+    <div id="quickstart"></div>
+    <style type="text/css">
+        #quickstart {
+            width: 300px;
+            height: 200px;
+            border: 1px solid grey;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="../../js/jquery.scrolltable.js"></script>
+<script type="text/javascript">
+    var items = [];
+    for (var i = 0; i < 1000; i += 1) {
+        items.push({
+            texts: ["item_" + i + "_1", "item_" + i + "_2", "item_" + i + "_3"]
+        })
+    }
+    $("#quickstart").ScrollTable({
+        heads: ["head1", "head2", "head3"],
+        sizes: ["40%", "30%", "30%"],
+        theme: "mid"
+    });
+    $("#quickstart").ScrollTable("show");
+    $("#quickstart").ScrollTable("insertItems", items);
+</script>
+</body>
+</html>
