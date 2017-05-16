@@ -1,6 +1,6 @@
 
 /*
- * JQuery scrolltable core v0.0.01
+ * JQuery scrolltable core v1.0.0
  *
  * Copyright (c) 2017 Jian.Ma
  *
@@ -230,14 +230,14 @@
         this._initScrollBar = function() {
             var t = this;
             this.options.container.find(".table-body").mCustomScrollbar({
-                theme: "smartTree",
+                theme: "scrolltable",
                 axis: "y",
                 scrollInertia: 0,
                 mouseWheel: {
                     scrollAmount: this.options.perHeight * 3
                 },
                 scrollButtons: {
-                    enable: true,
+                    enable: false,
                     scrollSpeed: this.options.perHeight,
                     scrollAmount: this.options.perHeight
                 },
