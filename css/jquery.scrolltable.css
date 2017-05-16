@@ -5,10 +5,15 @@
     table-layout: fixed;
     font-size: 14px;
 }
+.scroll-table table,tr,td,thead,tbody {
+    margin: 0;
+    padding: 0;
+}
 .scroll-table table {
     width: 100%;
     table-layout: fixed;
     line-height: 32px;
+    border-spacing: 0;
 }
 .scroll-table .table-head {
     height: 32px;
@@ -44,20 +49,41 @@
 .scroll-table.theme-dark .table-head {
     border-bottom: 1px solid #333;
 }
-/*.scroll-table.theme-dark .table-body tr.selected,*/
+.scroll-table.theme-dark .table-body tr.selected,
 .scroll-table.theme-dark .table-body tr:hover {
     background: #fff;
 }
 
-/* theme track */
-.scroll-table.theme-track {
+/* theme mid */
+.scroll-table.theme-mid {
     background: #ffffff;
     text-align: center;
 }
-.scroll-table.theme-track .table-head {
-    border-bottom: none;
+.scroll-table.theme-mid .table-head {
+    border-bottom: 1px solid #333;
 }
-.scroll-table.theme-track .table-body tr.selected,
-.scroll-table.theme-track .table-body tr:hover {
+.scroll-table.theme-mid .table-body tr.selected,
+.scroll-table.theme-mid .table-body tr:hover {
     background: #a4e1ff;
 }
+
+/* mCustomScrollbar */
+
+.mCSB_inside > .mCSB_container{ margin-right: 17px; }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_draggerRail{ background-color: #000; background-color: rgba(0,0,0,0.1); }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color: #000; background-color: rgba(0,0,0,0.15); }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{ background-color: rgba(0,0,0,0.15); }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar,
+.mCS-scrolltable.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar{ background-color: rgba(0,0,0,0.15); }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_buttonUp{ background-position: 0 0; }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_buttonDown{ background-position: -17px 0; }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_buttonLeft{ background-position: -80px -40px; }
+
+.mCS-scrolltable.mCSB_scrollTools .mCSB_buttonRight{ background-position: -80px -56px; }
