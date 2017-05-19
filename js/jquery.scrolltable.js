@@ -79,7 +79,7 @@
         };
 
         this.clean = function() {
-            this.options.container.find(".table-body .table-body-holder").empty();
+            this._clearItems();
             this._clearNodeData();
         };
 
@@ -109,14 +109,18 @@
 
         this._bindEvent = function() {
             var t = this;
-            this.options.container.off("click." + this.namespace, ".table-body-holder tr")
-            .on("click." + this.namespace, ".table-body-holder tr", function() {
+            this.options.container.off("click." + this.namespace, ".table-body-holder tbody tr")
+            .on("click." + this.namespace, ".table-body-holder tbody tr", function() {
                 var id = $(this).data("id");
                 t._selectItemById(id);
                 if (typeof t.options.callbacks.onClick == "function") {
                     t.options.callbacks.onClick.apply("", [id, this]);
                 }
             })
+        };
+
+        this._clearItems = function() {
+            this.options.container.find(".table-body .table-body-holder tbody").empty();
         };
 
         this._clearNodeData = function() {
@@ -157,16 +161,16 @@
                 return '';
             }
 
-            var sizes = this.options.sizes,
-                styles = this.options.styles,
+            var styles = this.options.styles,
                 texts = item.texts,
                 style = '',
                 itemEl = '',
-                $item = null;
+                content = '';
 
             for (var i = 0,len = texts.length; i < len; i++) {
                 style = styles[i] || ("item_" + i);
-                itemEl += '<td class="'+style+'" title="'+texts[i]+'" width="'+this._encodeHtml(sizes[i])+'">'+texts[i]+'</td>';
+                content = this._encodeHtml(texts[i]);
+                itemEl += '<td class="'+style+'" title="'+content+'">'+content+'</td>';
             }
 
             return '<tr data-id="'+item._id+'" class="'+(item.style||'')+'">'+itemEl+'</tr>';
@@ -220,7 +224,10 @@
             '       </table>' +
             '   </div>' +
             '   <div class="table-body"><div class="table-body-container">' +
-            '       <table class="table-body-holder"></table>' +
+            '       <table class="table-body-holder">' +
+            '           <thead>'+strHeadEl+'</thead>' +
+            '           <tbody><tr></tr></tbody>' +
+            '       </table>' +
             '   </div></div>' +
             '</div>';
 
@@ -262,17 +269,14 @@
 
         this._insertNodeData = function(item) {
             var _nodeData = $.extend(true, {}, item);
-            _nodeData._top = this.options.perHeight * this.data.nodes.length;
             _nodeData._id = this.data.nodes.length;
             this.data.nodes.push(_nodeData);
         };
 
         this._render = function() {
             var displayObj = null;
-            this.options.container.find(".table-body .table-body-holder").empty();
-            /**
-             * create tree node element when it is going to display
-             */
+            this._clearItems();
+
             for (var i = this.data.visibleNodes.start; i <= this.data.visibleNodes.end; i++) {
                 var node = this.data.nodes[i];
                 if (!node.treeNode) {
@@ -280,7 +284,7 @@
                 }
                 displayObj = displayObj ? displayObj.add(node.treeNode) : node.treeNode;
             }
-            this.options.container.find(".table-body .table-body-holder").append(displayObj);
+            this.options.container.find(".table-body .table-body-holder tbody").append(displayObj);
         };
 
         this._selectItemById = function(id) {
@@ -327,7 +331,7 @@
                 top = -this.options.container.find(".mCSB_container")[0].offsetTop;
             }
             this.options.container.find(".table-body .table-body-holder").css({
-                'top': top
+                'top': top - this.options.perHeight // subtract height of thead
             })
         };
 
